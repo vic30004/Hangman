@@ -1,34 +1,61 @@
-
 // global variables
 let wins = 0;
 let numberOfGuesses = 9;
-let lettersGuessed = "";
+const charList = 'abcdefghijklmnopqrstuvwxyz0123456789';
+//Show names, randomly selecting them and converting them to _
+let shows = ["Dark", "Stranger Things", "Black Mirror", "Money Heist"];
+let word;
+let buffer = [];
+let correctGuesses = [];
 
-//Show names, randomly selecting them and converting them to -
-let shows = ["Dark", "StrangerThings", "BlackMirror", "MoneyHeist"];
-let answerArray = [];
-let word = shows[Math.floor(Math.random() * shows.length)];
 
-//This will loop through the shows and save a show under current show as ---- 
+selectRandomWord();
+updateGuesses();
+updateCurrentWord();
 
-let currentWord = document.getElementById("current-word");
-
-for (let i = 0; i < word.length; i++) {
-
-    answerArray[i] = '_ ';
-
-    let currWord = document.createElement("span");
-    currWord.textContent = answerArray[i];
-    currentWord.appendChild(currWord)
+function reset(){
+  correctGuesses = [];
+  buffer = [];
+  numberOfGuesses = 9;
+  selectRandomWord();
+  updateGuesses();
+  updateCurrentWord();
 }
 
-// adding number of guesses left to document
+function selectRandomWord(){
+  //This will loop through the shows and save a show under current show as ---- 
+  word = shows[Math.floor(Math.random() * shows.length)];
+}
 
-let remains = document.getElementById('guess-remains');
+function updateCurrentWord(){
+  let currentWord = document.getElementById("current-word");
+  currentWord.innerHTML = ""; //this clears the content of the html element
+  for (let i = 0; i < word.length; i++) {
+      let currentLetter = word[i];
+      let letterToUse = "_";
+      if(currentLetter === " "){
+        letterToUse = "  ";
+      } else if(correctGuesses.indexOf(word[i].toLowerCase()) !== -1){
+        letterToUse = word[i];
+      }
+      let currWord = document.createElement("span");
+      currWord.classList.add("current-word-letter");
+      currWord.textContent = letterToUse;
+      currentWord.appendChild(currWord)
+  }
+}
 
-let remain = document.createElement("span");
-remain.textContent = numberOfGuesses;
-remains.appendChild(remain)
+function updateGuesses(){
+  // adding number of guesses left to document
+  let remains = document.getElementById('guess-remains');
+  remains.innerHTML = "";
+
+  let remain = document.createElement("span");
+  remain.textContent = numberOfGuesses;
+  remains.appendChild(remain);
+}
+
+
 
 //Adding wins total to Document
 let winsTotal = document.getElementById('wins');
@@ -36,61 +63,43 @@ let win = document.createElement("span");
 win.textContent = wins;
 winsTotal.appendChild(win);
 
+function updateGuessedLetters(key){
+  // we are only interested in alphanumeric keys
+  if (charList.indexOf(key) === -1 || numberOfGuesses === 0) {
+    return;
+  }
+
+  if(word.toLowerCase().replace(/ /g, "").indexOf(key) !== -1){
+    correctGuesses.push(key);
+    updateCurrentWord();
+  } else if (!buffer.includes(key)){
+    buffer.push(key);
+    guess.innerHTML = "";
+
+    let guessLetters = document.createElement('span');
+  
+    guessLetters.textContent = buffer.join(",");
+  
+    guess.appendChild(guessLetters);
+    numberOfGuesses--;
+    updateGuesses();
+    if(numberOfGuesses === 0){
+      //you lost
+    }
+  }
+}
+
 // records keys that are entered and saves them to an empty array. 
 
 document.addEventListener('DOMContentLoaded', () => {
 
-    'use strict';
-
-    let buffer = [];
+    let guess = document.getElementById("guess");
 
     document.addEventListener('keydown', event => {
-        const charList = 'abcdefghijklmnopqrstuvwxyz0123456789';
-        const key = event.key.toLowerCase();
-
-        // we are only interested in alphanumeric keys
-        if (charList.indexOf(key) === -1) return;
-
-        buffer.push(key);
-     
-       
-
-        //adds the keys strokes to document. Needs to be fixed, it adds all contents of the array every time.
-        for (let i = 0; i < buffer.length; i++) {
-            let guess = document.getElementById("guess");
-
-            let guessLetters = document.createElement('span');
-
-            guessLetters.textContent = buffer;
-
-            guess.appendChild(guessLetters)
-        }
-
-
-        (function(){
-            var shouldHandleKeyDown = true;
-            document.onkeydown = function(){
-              if (!shouldHandleKeyDown) return;
-              shouldHandleKeyDown = false;
-              // HANDLE KEY DOWN HERE
-            }
-            document.onkeyup = function(){
-              shouldHandleKeyDown = true;
-            }
-        })();
+        
+      const key = event.key.toLowerCase();
+      updateGuessedLetters(key);
 
     });
 
 });
-
-
-let remainingLetters = shows.length;
-
-//if (remainingLetters > 0) {
-//    console.log(answerArray.join(" "));
-
-//  }
-
-
-
-console.log(answerArray)

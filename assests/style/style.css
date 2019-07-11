@@ -1,5 +1,11 @@
 /* Main page setup */
 
+html, body{
+    width: 100%;
+    height: 100%;
+    margin: 0;
+}
+
 *{
     box-sizing: border-box;
 }
@@ -8,11 +14,11 @@
     margin: 0;
     font-family:'Bungee Inline', cursive, fantasy;
     font-size: 22px;
+    height: 100%;
     color: whitesmoke;
-    width: 100vw;
-    height: 100vh;
     background-color: rgb(34, 31, 31);
     padding: 10px;
+    overflow: auto;
 }
 
 /* flex container setup */
@@ -30,16 +36,19 @@
 
 .header{
     text-align: center;
-    margin: 0 auto 0 auto;
+    margin: 0 auto;
     width: 100%;
     background-color: rgb(229 , 9, 20);
+}
+
+.current-word-letter{
+    margin-right: 5px;
 }
 
 #main-img{
     margin-right: 50px;
     padding: 25px;
-    width: 700px;
-    height: 500px;
+    width: 100%;
 }
 
 /* section setup */
@@ -79,7 +88,7 @@
         margin: 20px auto;
         padding: 0;
 
-
+    
     }
 
 }
