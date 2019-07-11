@@ -7,7 +7,8 @@
     color: whitesmoke;
     width: 100vw;
     height: 100vh;
-    background-color: rgb(34, 31, 31)
+    background-color: rgb(34, 31, 31);
+    padding: 10px;
 }
 
 /* flex container setup */
@@ -17,7 +18,7 @@
     display: flex;
     justify-content: center;
     align-content: center;
-    margin: 20px auto;
+    margin: 10px auto;
 }
 
 
