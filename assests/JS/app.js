@@ -1,7 +1,47 @@
+
+// global variables
+let wins = 0;
+let numberOfGuesses = 9;
+let lettersGuessed = "";
+
+//Show names, randomly selecting them and converting them to -
+let shows = ["Dark", "StrangerThings", "BlackMirror", "MoneyHeist"];
+let answerArray = [];
+let word = shows[Math.floor(Math.random() * shows.length)];
+
+//This will loop through the shows and save a show under current show as ---- 
+
+let currentWord = document.getElementById("current-word");
+
+for (let i = 0; i < word.length; i++) {
+
+    answerArray[i] = '_ ';
+
+    let currWord = document.createElement("span");
+    currWord.textContent = answerArray[i];
+    currentWord.appendChild(currWord)
+}
+
+// adding number of guesses left to document
+
+let remains = document.getElementById('guess-remains');
+
+let remain = document.createElement("span");
+remain.textContent = numberOfGuesses;
+remains.appendChild(remain)
+
+//Adding wins total to Document
+let winsTotal = document.getElementById('wins');
+let win = document.createElement("span");
+win.textContent = wins;
+winsTotal.appendChild(win);
+
+// records keys that are entered and saves them to an empty array. 
+
 document.addEventListener('DOMContentLoaded', () => {
 
     'use strict';
-    // records keys that are entered and saves them to an empty array. 
+
     let buffer = [];
 
     document.addEventListener('keydown', event => {
@@ -12,48 +52,45 @@ document.addEventListener('DOMContentLoaded', () => {
         if (charList.indexOf(key) === -1) return;
 
         buffer.push(key);
-        console.log(buffer);
+     
+       
+
+        //adds the keys strokes to document. Needs to be fixed, it adds all contents of the array every time.
+        for (let i = 0; i < buffer.length; i++) {
+            let guess = document.getElementById("guess");
+
+            let guessLetters = document.createElement('span');
+
+            guessLetters.textContent = buffer;
+
+            guess.appendChild(guessLetters)
+        }
+
+
+        (function(){
+            var shouldHandleKeyDown = true;
+            document.onkeydown = function(){
+              if (!shouldHandleKeyDown) return;
+              shouldHandleKeyDown = false;
+              // HANDLE KEY DOWN HERE
+            }
+            document.onkeyup = function(){
+              shouldHandleKeyDown = true;
+            }
+        })();
+
     });
 
-
-let loop = (arr) => {
-    for (let i=0; i<arr.length; i++){
-        arr[i]
-    }
-}
-
-    // global variables
-    let wins = "0";
-    let numberOfGuesses = "9";
-    let lettersGuessed = "";
-
-    //Show names, randomly selecting them and converting them to -
-    let shows = ["Dark", "Stranger Things", "Black Mirror", "13 Reasons Why"];
-    let answerArray = [];
-    let randomShow = shows[Math.floor(Math.random() * shows.length)];
-
-    for (let i = 0; i < shows.length; i++) {
-
-        answerArray[i] = '_';
-
-    }
-    
-    let guess= document.getElemenetsByClassName("guess");
-    guess.ineerHtml = "smthn";
-
-    let remainingLetters = shows.length;
-
-    //if (remainingLetters > 0) {
-    //    console.log(answerArray.join(" "));
-
-  //  }
-
-    for (let j = 0; j<shows.length; j++){
-        if (shows[j] === loop(buffer)) {
-            answerArray[j] = loop(buffer);
-            remainingLetters--;
-        }
-    }
-
-   console.log(answerArray)
 });
+
+
+let remainingLetters = shows.length;
+
+//if (remainingLetters > 0) {
+//    console.log(answerArray.join(" "));
+
+//  }
+
+
+
+console.log(answerArray)

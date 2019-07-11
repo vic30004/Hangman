@@ -1,7 +1,11 @@
 /* Main page setup */
 
+*{
+    box-sizing: border-box;
+}
+
 .page{
-    margin: 0 auto;
+    margin: 0;
     font-family:'Bungee Inline', cursive, fantasy;
     font-size: 22px;
     color: whitesmoke;
@@ -14,11 +18,11 @@
 /* flex container setup */
 
 .flex-container{
-    width: 1500px;
+    width: 100%;
     display: flex;
     justify-content: center;
     align-content: center;
-    margin: 10px auto;
+    margin: 0 auto;
 }
 
 
@@ -26,7 +30,7 @@
 
 .header{
     text-align: center;
-    margin: 20 ;
+    margin: 0 auto 0 auto;
     width: 100%;
     background-color: rgb(229 , 9, 20);
 }
@@ -41,7 +45,8 @@
 /* section setup */
 
 #content{
-    line-height: 100px;
+    margin: 20px;
+    line-height: 50px;
     border: 4px dotted whitesmoke;
     padding: 20px;
 }
