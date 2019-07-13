@@ -140,7 +140,8 @@ function updateGuessedLetters(key){
     numberOfGuesses--;
     updateGuesses();
     if(numberOfGuesses === 0){
-      reset()
+      showBtn();
+      resetGame();
       
     }
   }
@@ -168,11 +169,11 @@ function resetGame(){
 //hidepicture and show picture
 
 function hidePicture() {
-  document.getElementById("main-img").style.visibility ="hidden"
+  document.getElementById("main-img").style.display ="none"
 };
 
 function showPicture() {
-  document.getElementById("main-img").style.visibility ="visible"
+  document.getElementById("main-img").style.display ="block"
 };
 
 
@@ -180,11 +181,11 @@ function showPicture() {
 //hide and show video
 
 function showVideo(){
-  document.getElementById("new-video").style.visibility ="visible"
+  document.getElementById("new-video").style.display ="block"
 };
 
 function hideVideo() {
-  document.getElementById("new-video").style.visibility ="hidden"
+  document.getElementById("new-video").style.display ="none"
 };
 
 //hiding picture and displaying video once game ends

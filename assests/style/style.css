@@ -53,7 +53,13 @@ html, body{
     margin-right: 50px;
     padding: 25px;
     width: 100%;
+    display: block;
+}
 
+#new-video{
+    margin-right: 50px;
+    padding: 25px;
+    width: 100%;
 }
 /*btn setup */
 
