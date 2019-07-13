@@ -55,10 +55,23 @@ html, body{
     width: 100%;
 
 }
+/*btn setup */
 
 #end-game-btn{
+    width: 100px;
+    height: 50px;
+    font-size: 19px;
+    background:whitesmoke;
+    border-radius: 6px;
+    font-family: 'Bungee Inline', cursive, fantasy;
     visibility: hidden;
 }
+
+#end-game-btn:hover{
+    background: rgb(34, 31, 31);
+    color: whitesmoke;
+}
+
 /* section setup */
 
 #content{
