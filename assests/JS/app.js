@@ -22,7 +22,7 @@ let correctGuesses = [];
 const resetButton = document.getElementById("reset-btn");
 
 
-let testString = ""
+let testString = "";
 
 selectRandomWord();
 updateGuesses();
@@ -47,13 +47,13 @@ function reset(){
 
 
 function selectRandomWord(){
-  //This will loop through the shows and save a show under current show as ---- 
+ 
   word = shows[Math.floor(Math.random() * shows.length)];
   word.split("").forEach(c => testString += "_");
   console.log(testString)
 }
 
-
+ //This will loop through the shows and save a show under current show as ---- 
 function updateCurrentWord(){
   let currentWord = document.getElementById("current-word");
   currentWord.innerHTML = ""; //this clears the content of the html element
@@ -110,6 +110,7 @@ let win = document.createElement("span");
 win.textContent = wins;
 winsTotal.appendChild(win);
 
+//reseting win if player wins. This will add +1 to the win
 function endGameWin(){
  
   winsTotal.innerHTML=""
@@ -118,7 +119,7 @@ function endGameWin(){
 }
 
 
-
+//this will reduce the number of guesses. Also Will make sure a letter is used once
 function updateGuessedLetters(key){
   // we are only interested in alphanumeric keys
   if (charList.indexOf(key) === -1 || numberOfGuesses === 0) {
