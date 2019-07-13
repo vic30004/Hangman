@@ -6,24 +6,10 @@ let shows = ["Dark", "Stranger Things", "Black Mirror", "Money Heist"];
 
 // Simple way to get object item
 const videos = {
-  "Dark": "show",
-  addUrl: function addingUrl(){
-    let hidePic = document.getElementById("main-img");
-    hidePic.style.visibility="hidden";
-    let newUrl = document.getElementById("new-video");
-    newUrl.setAttribute('src',"https://www.youtube.com/embed/BZ5OCIJVErw" )},
-  
-
-  strangerThings: {
-  "Stranger Things": "show",
-  addUrl: function addingUrl(){
-    let hidePic = document.getElementById("main-img");
-    hidePic.style.visibility="hidden";
-    let newUrl = document.getElementById("new-video");
-    newUrl.setAttribute('src',"https://www.youtube.com/watch?v=mnd7sFt5c3A" )
-},
-
-}
+  "Dark": "https://www.youtube.com/embed/BZ5OCIJVErw",
+  "Stranger Things": "https://www.youtube.com/embed/mnd7sFt5c3A",
+  "Black Mirror": "https://www.youtube.com/embed/V0XOApF5nLU",
+  "Money Heist": "https://www.youtube.com/embed/hMANIarjT50",  
 }
 
  //let newVideoUrl = videos[word];
@@ -44,16 +30,21 @@ updateCurrentWord();
 
 // recently added
 function reset(){
-  // add hidden class to button element
+  
   correctGuesses = [];
   buffer = [];
   numberOfGuesses = 13;
   selectRandomWord();
   updateGuesses();
   updateCurrentWord();
+  hideBtn();
+  showPicture()
+  hideVideo()
   updateGuessedLetters(key);
-  
 }
+
+
+
 
 function selectRandomWord(){
   //This will loop through the shows and save a show under current show as ---- 
@@ -89,9 +80,10 @@ function updateCurrentWord(){
 
     const gameIsOver = !testString.includes("_");   
     if ( gameIsOver ) {
-      
-      reset();
-     return wins++;
+      endGameWin();
+      updateVideo();
+      showBtn();
+      resetGame();
       }
       
       console.log('GAME OVER')
@@ -117,6 +109,15 @@ let winsTotal = document.getElementById('wins');
 let win = document.createElement("span");
 win.textContent = wins;
 winsTotal.appendChild(win);
+
+function endGameWin(){
+ 
+  winsTotal.innerHTML=""
+  win.textContent ++;
+  winsTotal.appendChild(win);
+}
+
+
 
 function updateGuessedLetters(key){
   // we are only interested in alphanumeric keys
@@ -144,6 +145,61 @@ function updateGuessedLetters(key){
     }
   }
 }
+
+//hide and show button
+
+function showBtn(){
+  document.getElementById("end-game-btn").style.visibility = "visible";
+}
+
+function hideBtn(){
+  document.getElementById("end-game-btn").style.visibility ="hidden"
+
+}
+
+
+function resetGame(){
+  document.getElementById("end-game-btn").addEventListener('click', function(){
+    reset();
+  })
+}
+
+
+//hidepicture and show picture
+
+function hidePicture() {
+  document.getElementById("main-img").style.visibility ="hidden"
+};
+
+function showPicture() {
+  document.getElementById("main-img").style.visibility ="visible"
+};
+
+
+
+//hide and show video
+
+function showVideo(){
+  document.getElementById("new-video").style.visibility ="visible"
+};
+
+function hideVideo() {
+  document.getElementById("new-video").style.visibility ="hidden"
+};
+
+//hiding picture and displaying video once game ends
+
+function updateVideo(){
+  hidePicture();
+  showVideo();
+  const newUrl = videos[word];
+  updateVideoSource (newUrl);
+};
+
+
+function updateVideoSource(sourceString){
+  document.getElementById("new-video").setAttribute('src', sourceString);
+};
 
 // records keys that are entered and saves them to an empty array. 
 

@@ -53,8 +53,12 @@ html, body{
     margin-right: 50px;
     padding: 25px;
     width: 100%;
+
 }
 
+#end-game-btn{
+    visibility: hidden;
+}
 /* section setup */
 
 #content{
